@@ -25,6 +25,6 @@ public class Customers {
     private String email;
     private String createdAt;
     private String updatedAt;
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
     private Users user;
 }

@@ -5,6 +5,7 @@ import com.customer.service.dtos.EditDto;
 import com.customer.service.dtos.JwtResponse;
 import com.customer.service.dtos.LoginDto;
 import com.customer.service.dtos.SignupDto;
+import com.customer.service.entities.Customers;
 import com.customer.service.entities.Users;
 import com.customer.service.exception.CustomException;
 import com.customer.service.jwt.JwtUtils;
@@ -48,10 +49,17 @@ public class AuthServiceImpl implements AuthService {
         if (res.isPresent()) {
             throw new CustomException("A user with the given username already exists.Try a different one.");
         }
+        Customers customers = modelMapper.map(signupDto, Customers.class);
+        users.setUsername(users.getUsername());
+        users.setPassword(passwordEncoder.encode(signupDto.getPassword()));
+        usersRepository.save(users);
+
         Users users = modelMapper.map(signupDto, Users.class);
         users.setUsername(users.getUsername());
         users.setPassword(passwordEncoder.encode(signupDto.getPassword()));
         usersRepository.save(users);
+
+
         return new ResponseEntity<>(modelMapper.map(signupDto, SignupDto.class), HttpStatus.CREATED);
     }
 

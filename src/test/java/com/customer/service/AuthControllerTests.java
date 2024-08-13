@@ -5,6 +5,7 @@ import com.customer.service.dtos.LoginDto;
 import com.customer.service.dtos.SignupDto;
 import com.google.gson.Gson;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,6 +27,7 @@ public class AuthControllerTests {
     private final String password = RandomStringUtils.randomAlphanumeric(15);
 
     @Test
+    @DisplayName("testSignUpSuccess")
     public void testSignUpSuccess() throws Exception {
         SignupDto signupDto = SignupDto.builder()
                 .username(username)
@@ -48,6 +50,7 @@ public class AuthControllerTests {
     }
 
     @Test
+    @DisplayName("testSignUpFailed")
     public void testSignUpFailed() throws Exception {
         SignupDto signupDto = SignupDto.builder()
                 .username(username)
@@ -70,6 +73,7 @@ public class AuthControllerTests {
     }
 
     @Test
+    @DisplayName("testLoginSuccess")
     public void testLoginSuccess() throws Exception {
         LoginDto loginDto = LoginDto.builder()
                 .username(username)
@@ -84,6 +88,7 @@ public class AuthControllerTests {
     }
 
     @Test
+    @DisplayName("testLoginFailed")
     public void testLoginFailed() throws Exception {
         LoginDto loginDto = LoginDto.builder()
                 .username(username)
@@ -98,6 +103,7 @@ public class AuthControllerTests {
     }
 
     @Test
+    @DisplayName("testEditSuccess")
     public void testEditSuccess() throws Exception {
         EditDto editDto = EditDto.builder()
                 .firstName(RandomStringUtils.randomAlphabetic(4))
@@ -113,6 +119,7 @@ public class AuthControllerTests {
     }
 
     @Test
+    @DisplayName("testEditFailed")
     public void testEditFailed() throws Exception {
         EditDto editDto = EditDto.builder()
                 .firstName(RandomStringUtils.randomAlphabetic(4))

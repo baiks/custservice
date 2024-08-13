@@ -24,6 +24,11 @@ public class AuthController {
 
     private final AuthService authService;
 
+    @RequestMapping(method = RequestMethod.GET, value = "/ping")
+    public String ping() {
+        return "Ping successful!";
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/signup")
     @Operation(summary = "Create a user", description = "Returns the details of a user.\n" + "\n" + "Example Requests:\n" + "\n" + "user")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "POST: /signup")})

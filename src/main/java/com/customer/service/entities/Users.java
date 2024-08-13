@@ -1,5 +1,6 @@
 package com.customer.service.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class Users {
     private String password;
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "customer_id")
     private Customers customer;
 }
