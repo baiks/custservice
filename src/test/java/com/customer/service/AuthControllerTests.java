@@ -39,7 +39,7 @@ public class AuthControllerTests {
                 .firstName(RandomStringUtils.randomAlphabetic(4))
                 .middleName(RandomStringUtils.randomAlphabetic(10))
                 .lastName(RandomStringUtils.randomAlphabetic(10))
-                .nationalId(RandomStringUtils.randomAlphanumeric(10))
+                .identificationNumber(RandomStringUtils.randomAlphanumeric(10))
                 .build();
 
         RequestBuilder request = MockMvcRequestBuilders
@@ -62,7 +62,7 @@ public class AuthControllerTests {
                 .firstName(RandomStringUtils.randomAlphabetic(4))
                 .middleName(RandomStringUtils.randomAlphabetic(10))
                 .lastName(RandomStringUtils.randomAlphabetic(10))
-                .nationalId(RandomStringUtils.randomAlphanumeric(10))
+                .identificationNumber(RandomStringUtils.randomAlphanumeric(10))
                 .build();
 
         RequestBuilder request = MockMvcRequestBuilders

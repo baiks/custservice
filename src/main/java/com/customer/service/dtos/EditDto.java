@@ -17,7 +17,7 @@ public class EditDto {
     private String firstName;
     private String middleName;
     private String lastName;
-    private String nationalId;
+    private String identificationNumber;
     private String address;
     private String mobileNumber;
     private Date dateOfBirth;

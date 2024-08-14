@@ -4,6 +4,7 @@ import com.customer.service.dtos.EditDto;
 import com.customer.service.dtos.JwtResponse;
 import com.customer.service.dtos.LoginDto;
 import com.customer.service.dtos.SignupDto;
+import com.customer.service.entities.Customers;
 import org.springframework.http.ResponseEntity;
 
 
@@ -12,7 +13,7 @@ public interface AuthService {
      * @param signupDto
      * @return
      */
-    ResponseEntity<SignupDto> signUp(SignupDto signupDto);
+    ResponseEntity<Customers> signUp(SignupDto signupDto);
 
     /**
      * @param loginDto

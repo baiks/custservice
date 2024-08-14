@@ -1,5 +1,6 @@
 package com.customer.service.jwt;
 
+import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +31,7 @@ public class JwtAuthEntryPoint implements AuthenticationEntryPoint {
         authErrorResponse.setCode(Integer.toString(UNAUTHORIZED.value()));
         authErrorResponse.setStatus(UNAUTHORIZED.name());
         authErrorResponse.setMessage(authException.getMessage().isEmpty() ? authException.getLocalizedMessage() : authException.getMessage());
-        response.getOutputStream().println(authErrorResponse.toString());
+        response.getOutputStream().println(new Gson().toJson(authErrorResponse, AuthErrorResponse.class));
     }
 
     @Getter

@@ -30,7 +30,7 @@ public class SignupDto {
     private String lastName;
     @NotBlank(message = "Please enter a valid nationalId")
     @Size(min = 8, max = 10, message = "Error: nationalId.Minimum of 8 and a maximum of 10 characters expected")
-    private String nationalId;
+    private String identificationNumber;
     @NotBlank(message = "Please enter a valid address")
     @Size(min = 1, max = 50, message = "Error: address. Minimum of 1 and a maximum of 50 characters expected")
     private String address;

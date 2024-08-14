@@ -36,7 +36,7 @@ public class AuthServiceTests {
                 .firstName(RandomStringUtils.randomAlphabetic(4))
                 .middleName(RandomStringUtils.randomAlphabetic(10))
                 .lastName(RandomStringUtils.randomAlphabetic(10))
-                .nationalId(RandomStringUtils.randomAlphanumeric(10))
+                .identificationNumber(RandomStringUtils.randomAlphanumeric(10))
                 .build();
         Assertions.assertEquals(authService.signUp(signupDto).getStatusCode(), HttpStatus.CREATED);
     }
@@ -54,7 +54,7 @@ public class AuthServiceTests {
                 .firstName(RandomStringUtils.randomAlphabetic(4))
                 .middleName(RandomStringUtils.randomAlphabetic(10))
                 .lastName(RandomStringUtils.randomAlphabetic(10))
-                .nationalId(RandomStringUtils.randomAlphanumeric(10))
+                .identificationNumber(RandomStringUtils.randomAlphanumeric(10))
                 .build();
         Assertions.assertEquals(authService.signUp(signupDto).getStatusCode(), HttpStatus.BAD_REQUEST);
     }
@@ -86,7 +86,7 @@ public class AuthServiceTests {
                 .firstName(RandomStringUtils.randomAlphabetic(4))
                 .middleName(RandomStringUtils.randomAlphabetic(10))
                 .lastName(RandomStringUtils.randomAlphabetic(10))
-                .nationalId(RandomStringUtils.randomAlphanumeric(10))
+                .identificationNumber(RandomStringUtils.randomAlphanumeric(10))
                 .build();
         Assertions.assertEquals(authService.editUser(editDto, 1L).getStatusCode(), HttpStatus.OK);
     }
@@ -98,7 +98,7 @@ public class AuthServiceTests {
                 .firstName(RandomStringUtils.randomAlphabetic(4))
                 .middleName(RandomStringUtils.randomAlphabetic(10))
                 .lastName(RandomStringUtils.randomAlphabetic(10))
-                .nationalId(RandomStringUtils.randomAlphanumeric(10))
+                .identificationNumber(RandomStringUtils.randomAlphanumeric(10))
                 .build();
         Assertions.assertEquals(authService.editUser(editDto, -3L).getStatusCode(), HttpStatus.BAD_REQUEST);
     }

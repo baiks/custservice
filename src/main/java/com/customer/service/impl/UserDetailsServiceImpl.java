@@ -3,7 +3,7 @@ package com.customer.service.impl;
 import com.customer.service.entities.Users;
 import com.customer.service.exception.CustomException;
 import com.customer.service.exception.ErrorResponse;
-import com.customer.service.repos.UsersRepository;
+import com.customer.service.repos.UsersRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,7 +15,7 @@ import jakarta.transaction.Transactional;
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UsersRepository usersRepository;
+    private final UsersRepo usersRepository;
 
     @Override
     @Transactional

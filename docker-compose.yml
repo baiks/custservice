@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: 682263059097.dkr.ecr.us-east-1.amazonaws.com/cust_service
+    ports:
+      - "8001:8001"
