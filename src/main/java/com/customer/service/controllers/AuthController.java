@@ -19,7 +19,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-@Tag(name = "AUTH", description = "User is required to login in order to obtain JWT")
+@Tag(name = "AUTH", description = "Manages customer data, including registration, authentication, and profile management.")
 public class AuthController {
 
 

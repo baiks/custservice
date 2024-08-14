@@ -2,6 +2,7 @@ package com.customer.service.repos;
 
 
 import com.customer.service.entities.Users;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,7 @@ public interface UsersRepo extends JpaRepository<Users, Long> {
 
     boolean existsByUsername(String name);
 
+    @Cacheable("user")
     Optional<Users> findById(long id);
 
 }

@@ -1,17 +1,16 @@
 package com.customer.service.impl;
 
 
-import com.customer.service.dtos.EditDto;
-import com.customer.service.dtos.JwtResponse;
-import com.customer.service.dtos.LoginDto;
-import com.customer.service.dtos.SignupDto;
+import com.customer.service.dtos.*;
 import com.customer.service.entities.Customers;
 import com.customer.service.entities.Users;
 import com.customer.service.exception.CustomException;
 import com.customer.service.jwt.JwtUtils;
+import com.customer.service.kafka.Producer;
 import com.customer.service.repos.CustomersRepo;
 import com.customer.service.repos.UsersRepo;
 import com.customer.service.services.AuthService;
+import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -40,6 +39,7 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
     private final ModelMapper modelMapper;
+    private final Producer producer;
 
     /**
      * @param signupDto
@@ -62,6 +62,12 @@ public class AuthServiceImpl implements AuthService {
         users.setCustomer(customers);
         usersRepo.save(users);
 
+        //Send notification to customer
+
+        //Could do better by maintaining a message template
+        String message = "Dear " + signupDto.getFirstName() + ", your registration is successful. You can now star enjoying the services at I & M by downloading the mobile app from either playstore and google play";
+        NotificationDto notificationDto = NotificationDto.builder().message(message).recipient(signupDto.getMobileNumber()).type(1).build();
+        producer.sendMessage("notifications-topic", new Gson().toJson(notificationDto));
         return new ResponseEntity<>(customers, HttpStatus.CREATED);
     }
 

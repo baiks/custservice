@@ -21,3 +21,20 @@ logging:
 jwt:
   secretKey: baiksdev@2024
   jwtValidityPeriodInMilliSecs: 6000000
+micro:
+  services:
+    accounts:
+      url: http://localhost:8002
+    transactions:
+      url: http://localhost:8002
+kafka:
+  producer:
+    bootstrap-servers: "localhost:9092"
+    key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
+    value-serializer: "org.apache.kafka.common.serialization.StringSerializer"
+
+  consumer:
+    bootstrap-servers: "localhost:9092"
+    key-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"
+    value-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"
+    group-id: "my-group"
