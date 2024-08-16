@@ -16,7 +16,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         final String securitySchemeName = "bearerAuth";
-        final String apiTitle = "Customer API";
+        final String apiTitle = "Customer Service API";
         final String description = "Manages customer data, including registration, authentication, and profile management.";
         String apiVersion = "1.0.0";
         Contact contact = new Contact();

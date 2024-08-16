@@ -4,18 +4,19 @@ import com.customer.service.exception.CustomException;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.MessageSource;
+import org.springframework.core.NestedExceptionUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import com.customer.service.exception.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.server.ResponseStatusException;
 
 
 @Log4j2
-@ControllerAdvice
-public class CustControllerAdvice extends MessageSourceAdviceCtrl {
-    protected CustControllerAdvice(MessageSource messageSource) {
+@org.springframework.web.bind.annotation.ControllerAdvice
+public class ControllerAdvice extends MessageSourceAdviceCtrl {
+    protected ControllerAdvice(MessageSource messageSource) {
         super(messageSource);
     }
 
@@ -35,7 +36,14 @@ public class CustControllerAdvice extends MessageSourceAdviceCtrl {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ErrorResponse(HttpStatus.BAD_REQUEST.toString(), message));
     }
+    @ExceptionHandler(ResponseStatusException.class)
+    public ResponseEntity<ErrorResponse> handleApiRequestException(ResponseStatusException e) {
+        String message = NestedExceptionUtils.getMostSpecificCause(e).getMessage();
+        log.error("ResponseStatusException...{}", message);
 
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(HttpStatus.BAD_REQUEST.toString(), message));
+    }
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<ErrorResponse> handleExceptionCustomException(CustomException e) {
         log.error("Custom Exception... " + e.getMessage());

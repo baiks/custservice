@@ -24,17 +24,11 @@ jwt:
 micro:
   services:
     accounts:
-      url: http://localhost:8002
+      url: http://localhost:8002/account/
     transactions:
-      url: http://localhost:8002
+      url: http://localhost:8003/transaction/
 kafka:
   producer:
     bootstrap-servers: "localhost:9092"
     key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
     value-serializer: "org.apache.kafka.common.serialization.StringSerializer"
-
-  consumer:
-    bootstrap-servers: "localhost:9092"
-    key-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"
-    value-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"
-    group-id: "my-group"

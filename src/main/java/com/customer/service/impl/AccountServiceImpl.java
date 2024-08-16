@@ -30,23 +30,20 @@ import org.apache.http.HttpEntity;
 @Service
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
-
-    private final Producer producer;
     private final HttpCallsService httpCallsService;
-    private final ModelMapper modelMapper;
     @Value("${micro.services.accounts.url}")
     public String url;
 
 
     /**
-     * @param accountsDto
+     * @param customerId
      * @return
      */
     @Override
-    public ResponseEntity<Accounts> create(AccountsDto accountsDto, Long customerId) {
+    public ResponseEntity<Accounts> create(Long customerId) {
         HttpResponse httpResponse = null;
         try {
-            httpResponse = httpCallsService.post(new Gson().toJson(accountsDto), url + "create");
+            httpResponse = httpCallsService.post(null, url + "create/" + customerId);
             HttpEntity entity = httpResponse.getEntity();
             Accounts accounts = new Gson().fromJson(EntityUtils.toString(entity), Accounts.class);
             return new ResponseEntity<>(accounts, HttpStatusCode.valueOf(httpResponse.getStatusLine().getStatusCode()));
@@ -59,7 +56,7 @@ public class AccountServiceImpl implements AccountService {
     public ResponseEntity<Accounts> findById(Long id) {
         HttpResponse httpResponse = null;
         try {
-            httpResponse = httpCallsService.get(url + "view" + String.valueOf(id));
+            httpResponse = httpCallsService.get(url + "view/" + id);
             HttpEntity entity = httpResponse.getEntity();
             Accounts accounts = new Gson().fromJson(EntityUtils.toString(entity), Accounts.class);
             return new ResponseEntity<>(accounts, HttpStatusCode.valueOf(httpResponse.getStatusLine().getStatusCode()));
@@ -72,7 +69,7 @@ public class AccountServiceImpl implements AccountService {
     public ResponseEntity<Accounts> close(Long id) {
         HttpResponse httpResponse = null;
         try {
-            httpResponse = httpCallsService.patch("", url + "edit" + String.valueOf(id));
+            httpResponse = httpCallsService.patch("", url + "close/" + id);
             HttpEntity entity = httpResponse.getEntity();
             Accounts accounts = new Gson().fromJson(EntityUtils.toString(entity), Accounts.class);
             return new ResponseEntity<>(accounts, HttpStatusCode.valueOf(httpResponse.getStatusLine().getStatusCode()));

@@ -2,7 +2,7 @@ spring:
   application:
     name: Customer Service API
   profiles:
-    active: mysql
+    active: h2
 server:
   port: 8001
 

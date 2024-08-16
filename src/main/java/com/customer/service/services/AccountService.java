@@ -7,10 +7,11 @@ import org.springframework.http.ResponseEntity;
 
 public interface AccountService {
     /**
-     * @param accountsDto
+     *
+     * @param customerId
      * @return
      */
-    ResponseEntity<Accounts> create(AccountsDto accountsDto, Long customerId);
+    ResponseEntity<Accounts> create(Long customerId);
 
 
     /**

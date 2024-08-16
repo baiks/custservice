@@ -1,5 +1,7 @@
 package com.customer.service.impl;
 
+import com.customer.service.services.HttpCallsService;
+import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
@@ -10,19 +12,21 @@ import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
-
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
 
 import javax.net.ssl.SSLContext;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.security.*;
-import java.security.cert.CertificateException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
-import java.security.spec.InvalidKeySpecException;
 
-public class HttpCallsServiceImpl {
-
+@Service
+public class HttpCallsServiceImpl implements HttpCallsService {
+    @Override
     public HttpResponse post(String request, String url) {
         try {
             RequestConfig config = RequestConfig.custom()
@@ -32,7 +36,7 @@ public class HttpCallsServiceImpl {
             URIBuilder builder = new URIBuilder(url);
             URI uri = builder.build();
             HttpUriRequest httpUriRequest = RequestBuilder.post(uri).setEntity(new StringEntity(request))
-                    .setHeader("Content-type", "application/json").build();
+                    .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).build();
             HttpClient httpclient = null;
             if (url.startsWith("https")) {
                 SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom()
@@ -55,6 +59,7 @@ public class HttpCallsServiceImpl {
         return null;
     }
 
+    @Override
     public HttpResponse patch(String request, String url) {
         try {
             RequestConfig config = RequestConfig.custom()
@@ -64,7 +69,7 @@ public class HttpCallsServiceImpl {
             URIBuilder builder = new URIBuilder(url);
             URI uri = builder.build();
             HttpUriRequest httpUriRequest = RequestBuilder.patch(uri).setEntity(new StringEntity(request))
-                    .setHeader("Content-type", "application/json").build();
+                    .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).build();
             HttpClient httpclient = null;
             if (url.startsWith("https")) {
                 SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom()
@@ -87,6 +92,7 @@ public class HttpCallsServiceImpl {
         return null;
     }
 
+    @Override
     public HttpResponse get(String url) {
         try {
             RequestConfig config = RequestConfig.custom()
@@ -96,7 +102,7 @@ public class HttpCallsServiceImpl {
             URIBuilder builder = new URIBuilder(url);
             URI uri = builder.build();
             HttpUriRequest httpUriRequest = RequestBuilder.get(uri)
-                    .setHeader("Content-type", "application/json").build();
+                    .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).build();
             HttpClient httpclient = null;
             if (url.startsWith("https")) {
                 SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom()
@@ -119,3 +125,4 @@ public class HttpCallsServiceImpl {
         return null;
     }
 }
+

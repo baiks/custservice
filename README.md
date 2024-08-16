@@ -1,6 +1,10 @@
-# Cards RESTful web service
+# Customer Service
 
-An application named Cards that allows users to create and manage tasks in the form of cards.
+Manages customer data, including registration, authentication, and profile management.
+
+## Architecture
+
+![image](architecture.png)
 
 ## Pre-requisites
 
@@ -9,6 +13,7 @@ An application named Cards that allows users to create and manage tasks in the f
 - [**Maven**](https://maven.apache.org/download.cgi)
 - [**Docker**](https://www.docker.com/)
 - [**Docker Compose**](https://docs.docker.com/reference/cli/docker/compose/)
+- [**Kafka**](https://kafka.apache.org/quickstart)
 
 ## How to run the project
 
@@ -26,7 +31,7 @@ You can either use h2 or mysql database by changing the configuration on applica
 spring:
   profiles:
     active: h2 or mysql
-```
+    
     For mysql remember to change the database configurations below
     
     `url: jdbc:mysql://127.0.0.1:3306/cards?createDatabaseIfNotExist=true`
@@ -43,7 +48,7 @@ spring:
 To access the APIs, open the link http://localhost:8001/swagger-ui
 ```
 
-![image](https://github.com/baiks/cards/assets/8487325/0ba3be40-02dc-4145-950e-734fefeabe6e)
+![image](img.png)
 
 ```sh
 You can create your own user on swagger by invoking the end point /auth/signup.
