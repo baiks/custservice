@@ -39,7 +39,7 @@ public class SignupDto {
     private String mobileNumber;
     private Date dateOfBirth;
     @NotBlank(message = "Please enter a valid mobileNumber")
-    @Size(min = 9, max = 12, message = "Error: mobileNumber. Minimum of 1 and a maximum of 50 characters expected")
+    @Size(min = 1, max = 12, message = "Error: mobileNumber. Minimum of 1 and a maximum of 50 characters expected")
     private String country;
     @NotBlank(message = "Please enter a valid email")
     @Size(min = 1, max = 50, message = "Error: email. Minimum of 1 and a maximum of 50 characters expected")
