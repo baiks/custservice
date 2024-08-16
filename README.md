@@ -34,7 +34,7 @@ spring:
     
     For mysql remember to change the database configurations below
     
-    `url: jdbc:mysql://127.0.0.1:3306/cards?createDatabaseIfNotExist=true`
+    `url: jdbc:mysql://127.0.0.1:3306/interview_im?createDatabaseIfNotExist=true`
     `username: root`
     `password: Baiks@123`
 ```
