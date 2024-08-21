@@ -29,6 +29,6 @@ micro:
       url: http://localhost:8003/transaction/
 kafka:
   producer:
-    bootstrap-servers: "localhost:9092"
-    key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
-    value-serializer: "org.apache.kafka.common.serialization.StringSerializer"
+    bootstrap-servers: localhost:9092
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    value-serializer: org.apache.kafka.common.serialization.StringSerializer
