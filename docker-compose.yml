@@ -15,10 +15,9 @@ services:
     depends_on:
       - zookeeper
     environment:
-      KAFKA_ADVERTISED_LISTENERS: INSIDE://localhost:9092,OUTSIDE://localhost:9093
+#      KAFKA_ADVERTISED_LISTENERS: INSIDE://0.0.0.0:9092,OUTSIDE://0.0.0.0:9093
       KAFKA_LISTENERS: INSIDE://0.0.0.0:9092,OUTSIDE://0.0.0.0:9093
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
-      KAFKA_LISTENER_NAME: INSIDE
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_MESSAGE_MAX_BYTES: 1000000
@@ -26,6 +25,21 @@ services:
     ports:
       - "9092:9092"  # Internal network communication
       - "9093:9093"  # External network communication
+    networks:
+      - imnetwork
+
+  mysql_db:
+    image: mysql:latest
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: Baiks@123
+      MYSQL_DATABASE: interview_im
+      MYSQL_USER: baiks
+      MYSQL_PASSWORD: Baiks@123
+    ports:
+      - "3307:3306"  # Mapping host port 3307 to container port 3306
+    volumes:
+      - data:/var/lib/mysql
     networks:
       - imnetwork
 
@@ -39,8 +53,16 @@ services:
       - "8001:8001"
     depends_on:
       - kafka
+      - mysql_db
     environment:
-      SPRING_PROFILES_ACTIVE: h2
+      SPRING_PROFILES_ACTIVE: mysql
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/interview_im?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: baiks
+      SPRING_DATASOURCE_PASSWORD: Baiks@123
+      SPRING_DATASOURCE_HIKARI_AUTOCOMMIT: "true"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQLDialect
       MICRO_SERVICES_ACCOUNTS_URL: http://account_service:8002/account/
       MICRO_SERVICES_TRANSACTIONS_URL: http://transaction_service:8003/transaction/
       KAFKA_PRODUCER_BOOTSTRAP_SERVERS: kafka:9092
@@ -54,3 +76,6 @@ services:
 networks:
   imnetwork:
     driver: bridge
+
+volumes:
+  data:
