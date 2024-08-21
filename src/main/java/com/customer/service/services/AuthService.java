@@ -27,5 +27,5 @@ public interface AuthService {
      * @param id
      * @return
      */
-    ResponseEntity<EditDto> editUser(EditDto editDto, Long id);
+    ResponseEntity<Customers> editUser(EditDto editDto, Long id);
 }

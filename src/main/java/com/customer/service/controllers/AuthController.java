@@ -72,7 +72,7 @@ public class AuthController {
             "  \"email\": \"string\"\n" +
             "}")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "PATCH: /edit/1")})
-    public ResponseEntity<EditDto> edit(@Valid @RequestBody EditDto editDto, @PathVariable Long id) {
+    public ResponseEntity<Customers> edit(@Valid @RequestBody EditDto editDto, @PathVariable Long id) {
         return authService.editUser(editDto, id);
     }
 }

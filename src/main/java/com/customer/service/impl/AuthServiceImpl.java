@@ -107,14 +107,15 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public ResponseEntity<EditDto> editUser(EditDto editDto, Long id) {
+    public ResponseEntity<Customers> editUser(EditDto editDto, Long id) {
         Optional<Users> res = usersRepo.findById(id);
         if (!res.isPresent()) {
             throw new CustomException("A user with the given id doesn't exist");
         }
-        Users users = modelMapper.map(editDto, Users.class);
-        usersRepo.save(users);
-        return new ResponseEntity<>(modelMapper.map(editDto, EditDto.class), HttpStatus.OK);
+        Customers customers = modelMapper.map(editDto, Customers.class);
+        customers.setId(res.get().getId());
+        customersRepo.save(customers);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
 }
