@@ -23,6 +23,7 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
+import java.util.Objects;
 
 @Service
 public class HttpCallsServiceImpl implements HttpCallsService {
@@ -35,8 +36,14 @@ public class HttpCallsServiceImpl implements HttpCallsService {
                     .setSocketTimeout(5 * 1000).build(); //Could do better on parametizing these if had sufficient time
             URIBuilder builder = new URIBuilder(url);
             URI uri = builder.build();
-            HttpUriRequest httpUriRequest = RequestBuilder.post(uri).setEntity(new StringEntity(request))
-                    .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).build();
+            HttpUriRequest httpUriRequest;
+            if (!Objects.isNull(request)) {
+                httpUriRequest = RequestBuilder.post(uri).setEntity(new StringEntity(request))
+                        .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).build();
+            } else {
+                httpUriRequest = RequestBuilder.post(uri)
+                        .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).build();
+            }
             HttpClient httpclient = null;
             if (url.startsWith("https")) {
                 SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom()
@@ -68,8 +75,14 @@ public class HttpCallsServiceImpl implements HttpCallsService {
                     .setSocketTimeout(5 * 1000).build(); //Could do better on parametizing these if had sufficient time
             URIBuilder builder = new URIBuilder(url);
             URI uri = builder.build();
-            HttpUriRequest httpUriRequest = RequestBuilder.patch(uri).setEntity(new StringEntity(request))
-                    .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).build();
+            HttpUriRequest httpUriRequest;
+            if (!Objects.isNull(request)) {
+                httpUriRequest = RequestBuilder.patch(uri).setEntity(new StringEntity(request))
+                        .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).build();
+            } else {
+                httpUriRequest = RequestBuilder.patch(uri)
+                        .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).build();
+            }
             HttpClient httpclient = null;
             if (url.startsWith("https")) {
                 SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom()
