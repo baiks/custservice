@@ -69,4 +69,14 @@ public class AccountServiceImpl implements AccountService {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Override
+    public ResponseEntity<Accounts> activate(Long id) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Accounts> deActivate(Long id) {
+        return null;
+    }
 }

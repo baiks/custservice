@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface AccountService {
     /**
-     *
      * @param customerId
      * @return
      */
@@ -21,9 +20,20 @@ public interface AccountService {
     ResponseEntity<Accounts> findById(Long id);
 
     /**
-     *
      * @param id
      * @return
      */
     ResponseEntity<Accounts> close(Long id);
+
+    /**
+     * @param id
+     * @return
+     */
+    ResponseEntity<Accounts> activate(Long id);
+
+    /**
+     * @param id
+     * @return
+     */
+    ResponseEntity<Accounts> deActivate(Long id);
 }
