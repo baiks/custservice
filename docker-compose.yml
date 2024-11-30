@@ -47,7 +47,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: 682263059097.dkr.ecr.us-east-1.amazonaws.com/customer_service
+    image: 682263059097.dkr.ecr.us-east-1.amazonaws.com/customer-service
     container_name: customer_service
     ports:
       - "8001:8001"
@@ -63,8 +63,8 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_JPA_SHOW_SQL: "true"
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQLDialect
-      MICRO_SERVICES_ACCOUNTS_URL: http://account_service:8002/account/
-      MICRO_SERVICES_TRANSACTIONS_URL: http://transaction_service:8003/transaction/
+      MICRO_SERVICES_ACCOUNTS_URL: http://account-service:8002/account/
+      MICRO_SERVICES_TRANSACTIONS_URL: http://transaction-service:8003/transaction/
       KAFKA_PRODUCER_BOOTSTRAP_SERVERS: kafka:9092
       KAFKA_PRODUCER_KEY_SERIALIZER: org.apache.kafka.common.serialization.StringSerializer
       KAFKA_PRODUCER_VALUE_SERIALIZER: org.apache.kafka.common.serialization.StringSerializer
